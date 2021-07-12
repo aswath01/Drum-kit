@@ -2,16 +2,17 @@ for (var i = 0; i < document.querySelectorAll(".drum").length; i++) {
     document.querySelectorAll(".drum")[i].addEventListener("click", function() {
         var a = this.innerHTML;
         makeSound(a);
+        passSound(a);
     });
 }
 
 document.addEventListener("keypress", function(event) {
 
     makeSound(event.key);
+    passSound(event.key);
+    // alert(event.key);
 });
 
-// var audio = new Audio("sounds/crash.mp3");
-//     audio.play();
 function makeSound(key) {
     switch (key) {
         case "w":
@@ -48,4 +49,12 @@ function makeSound(key) {
             break;
     }
 
+}
+
+function passSound(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(function() {
+        activeButton.classList.remove("pressed");
+    }, 100);
 }
